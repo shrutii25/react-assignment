@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Container, Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import axios from "axios";
 import "../styles/posts.css";
 import Zoom from "./zoom";
@@ -10,7 +10,7 @@ const AllPosts = () => {
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomedImageUrl, setZoomedImageUrl] = useState("");
   let count = 0;
-  let image, width, height, author, likes, comments, title, zoom;
+  let image, author, likes, comments, title;
   useEffect(() => {
     getPosts();
   }, [selectedValue]);
@@ -77,13 +77,6 @@ const AllPosts = () => {
             author = post.data.author;
             likes = post.data.ups;
             comments = post.data.num_comments;
-            height = post.data.thumbnail_height;
-            width = post.data.thumbnail_width;
-
-            if (post.data.preview) {
-              let length = post.data.preview.images[0].resolutions.length;
-              zoom = post.data.preview.images[0].resolutions[length - 1].url;
-            } else zoom = image;
 
             return (
               <Card
